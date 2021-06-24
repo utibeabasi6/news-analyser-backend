@@ -1,0 +1,5 @@
+
+applications:
+  - name: "News analyser"
+    random-route: true
+    memory: 64M
