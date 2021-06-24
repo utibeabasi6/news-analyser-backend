@@ -5,8 +5,8 @@ var mydb;
 
 class CloudantDB {
     constructor() {
-        const appEnv = process.env.VCAP_SERVICES
-        this.cloudant = Cloudant(appEnv['cloudantNoSQLDB'].credentials);
+        const appEnv = new Config().getAppEnv()
+        this.cloudant = Cloudant(appEnv.services['cloudantNoSQLDB'][0].credentials);
         this.cloudant.db.create('news', (err) => {
             if (!err) {
                 console.log('created db');
