@@ -1,11 +1,11 @@
 var cfenv = require("cfenv")
-var vcapLocal = require('./vcap-local.json');
+// var vcapLocal = require('./vcap-local.json');
 
 class Config {
     // Get global app configuration
     getAppEnv() {
-        const appEnvOpts = vcapLocal ? { vcap: vcapLocal } : {}
-        const appEnv = cfenv.getAppEnv(appEnvOpts)
+        // const appEnvOpts = vcapLocal ? { vcap: vcapLocal } : {}
+        const appEnv = cfenv.getAppEnv()
         return appEnv
     }
 
