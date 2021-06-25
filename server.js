@@ -8,7 +8,7 @@ const ToneAnalyser = require("./services/tone-analyser");
 const parser = require('./utils/parser');
 require('dotenv').config();
 
-console.log(process.env.VCAP_SERVICES);
+console.log(process.env.VCAP_SERVICES.cloudantNoSQLDB);
 const app = express();
 app.use(helmet());
 
