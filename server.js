@@ -11,12 +11,8 @@ require('dotenv').config();
 const app = express();
 app.use(helmet());
 
-<<<<<<< HEAD
 // Configure services
 var newsApi = new newsapi()
-=======
-var newsApi = new newsapi();
->>>>>>> ed1c7de6533a92d58dfe4de590a51f68e21f6b6d
 var db = new CloudantDB();
 var newsParser = new parser();
 var naturalLanguage = new NaturalLanguage();
@@ -40,17 +36,9 @@ app.get('/get-news', (req, res) => {
 app.get('/get-analysis', (req, res, next) => {
 	let url = req.query.url;
 	naturalLanguage.analyzeUrl(url).then(response =>{
-<<<<<<< HEAD
 		res.json(response.result)
 	}).catch(next)
 })
-=======
-		res.json(response.result);
-	}).catch(err =>{
-		next(err);
-	});
-});
->>>>>>> ed1c7de6533a92d58dfe4de590a51f68e21f6b6d
 
 app.get('/get-tone-analysis', (req, res, next) =>{
 	let description = req.query.description;
@@ -59,12 +47,8 @@ app.get('/get-tone-analysis', (req, res, next) =>{
 	}).catch(next);
 });
 
-<<<<<<< HEAD
 
 const appEnv = new config().getAppEnv()
-=======
-const appEnv = new config().getAppEnv();
->>>>>>> ed1c7de6533a92d58dfe4de590a51f68e21f6b6d
 
 app.listen(appEnv.port, () => {
 	console.log(`The server has started on url ${appEnv.url}`);
