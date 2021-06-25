@@ -2,6 +2,7 @@ const NewsAPI = require('newsapi');
 const config = require('../config');
 
 class NewsApi {
+    static shouldGet = true;
     constructor() {
         let newsApiConfig = new config().getNewsApiConfig()
         this.newsapi = new NewsAPI(newsApiConfig.apiKey);

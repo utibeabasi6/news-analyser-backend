@@ -29,6 +29,9 @@ class CloudantDB {
             console.log('Inserted all documents');
         })
     }
+    getNewsDetail(id, cb){
+        mydb.find({ selector: { _id: id } }, cb);
+    }
 
 }
 

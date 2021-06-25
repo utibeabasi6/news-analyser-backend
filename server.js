@@ -33,6 +33,18 @@ app.get('/get-news', (req, res) => {
 	
 });
 
+app.get('/news-detail', (req, res, next) =>{
+	let id = req.query.id
+
+	db.getNewsDetail(id, (err, response) =>{
+		if(!err){
+			res.json(response.docs[0])
+		}else{
+			next(err)
+		}
+	})
+})
+
 app.get('/get-analysis', (req, res, next) => {
 	let url = req.query.url;
 	naturalLanguage.analyzeUrl(url).then(response =>{
