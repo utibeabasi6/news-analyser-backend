@@ -6,7 +6,7 @@ var mydb;
 class CloudantDB {
     constructor() {
         if(process.env.NODE_ENV == 'production'){
-            this.cloudant = Cloudant(process.env.VCAP_SERVICES['cloudantNoSQLDB'][0].credentials);
+            this.cloudant = Cloudant(process.env.VCAP_SERVICES.cloudantNoSQLDB[0].credentials);
         }
         else{
         const appEnv = new Config().getAppEnv()
