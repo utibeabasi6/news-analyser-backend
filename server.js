@@ -35,7 +35,9 @@ app.get('/get-news', (req, res) => {
 
 app.get('/news-detail', (req, res, next) =>{
 	let id = req.query.id
-
+	if(id == ""){
+		res.json({"error": "no id specified"})
+	}
 	db.getNewsDetail(id, (err, response) =>{
 		if(!err){
 			res.json(response.docs[0])
