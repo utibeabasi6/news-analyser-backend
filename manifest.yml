@@ -1,5 +1,5 @@
 
 applications:
-  - name: "News analyser"
+  - name: "News analyser backend"
     random-route: true
     memory: 64M
