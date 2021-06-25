@@ -12,7 +12,7 @@ const app = express();
 app.use(helmet());
 
 // Configure services
-var newsApi = new newsapi()
+var newsApi = new newsapi();
 var db = new CloudantDB();
 var newsParser = new parser();
 var naturalLanguage = new NaturalLanguage();
@@ -34,25 +34,25 @@ app.get('/get-news', (req, res) => {
 });
 
 app.get('/news-detail', (req, res, next) =>{
-	let id = req.query.id
-	if(id == ""){
-		res.json({"error": "no id specified"})
+	let id = req.query.id;
+	if(id === "" || id === undefined){
+		res.json({"error": "no id specified"});
 	}
 	db.getNewsDetail(id, (err, response) =>{
 		if(!err){
-			res.json(response.docs[0])
+			res.json(response.docs[0]);
 		}else{
-			next(err)
+			next(err);
 		}
-	})
-})
+	});
+});
 
 app.get('/get-analysis', (req, res, next) => {
 	let url = req.query.url;
 	naturalLanguage.analyzeUrl(url).then(response =>{
-		res.json(response.result)
-	}).catch(next)
-})
+		res.json(response.result);
+	}).catch(next);
+});
 
 app.get('/get-tone-analysis', (req, res, next) =>{
 	let description = req.query.description;
@@ -62,7 +62,7 @@ app.get('/get-tone-analysis', (req, res, next) =>{
 });
 
 
-const appEnv = new config().getAppEnv()
+const appEnv = new config().getAppEnv();
 
 app.listen(appEnv.port, () => {
 	console.log(`The server has started on url ${appEnv.url}`);
