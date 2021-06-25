@@ -4,11 +4,13 @@ const Config = require('../config');
 
 class NaturalLanguage {
     constructor() {
+        const config = new Config()
         if (process.env.NODE_ENV == 'production') {
-            this.nlu = new NaturalLanguageUnderstandingV1(process.env.VCAP_SERVICES['natural-language-understanding'][0].credentials);
+            const appEnv = config.getAppEnv()
+            this.nlu = new NaturalLanguageUnderstandingV1(appEnv.services['natural-language-understanding'][0].credentials);
         }
         else {
-            const config = new Config().getNaturalLanguageConfig()
+            config.getNaturalLanguageConfig()
             this.nlu = new NaturalLanguageUnderstandingV1({
                 authenticator: new IamAuthenticator({ apikey: config.apiKey }),
                 version: '2018-04-05',

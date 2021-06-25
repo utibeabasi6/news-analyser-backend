@@ -12,9 +12,6 @@ const app = express();
 app.use(helmet());
 
 // Configure services
-const appEnv = new config().getAppEnv()
-console.log(appEnv.services);
-
 var newsApi = new newsapi()
 var db = new CloudantDB();
 var newsParser = new parser();
@@ -50,6 +47,8 @@ app.get('/get-tone-analysis', (req, res, next) =>{
 	}).catch(next);
 });
 
+
+const appEnv = new config().getAppEnv()
 
 app.listen(appEnv.port, () => {
 	console.log(`The server has started on url ${appEnv.url}`);
