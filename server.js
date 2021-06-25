@@ -11,6 +11,7 @@ require('dotenv').config()
 const app = express();
 app.use(helmet())
 
+// Configure services
 var newsApi = new newsapi()
 var db = new CloudantDB();
 var newsParser = new parser()
@@ -36,9 +37,7 @@ app.get('/get-analysis', (req, res, next) => {
 	let url = req.query.url
 	naturalLanguage.analyzeUrl(url).then(response =>{
 		res.json(response.result)
-	}).catch(err =>{
-		next(err)
-	})
+	}).catch(next)
 })
 
 app.get('/get-tone-analysis', (req, res, next) =>{
