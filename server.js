@@ -8,7 +8,6 @@ const ToneAnalyser = require("./services/tone-analyser");
 const parser = require('./utils/parser');
 require('dotenv').config();
 
-console.log(process.env.VCAP_SERVICES.cloudantNoSQLDB);
 const app = express();
 app.use(helmet());
 
@@ -50,7 +49,7 @@ app.get('/get-tone-analysis', (req, res, next) =>{
 
 
 const appEnv = new config().getAppEnv()
-
+console.log(appEnv.services);
 app.listen(appEnv.port, () => {
 	console.log(`The server has started on url ${appEnv.url}`);
 });
