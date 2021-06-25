@@ -5,13 +5,8 @@ var mydb;
 
 class CloudantDB {
     constructor() {
-        if(process.env.NODE_ENV == 'production'){
-            this.cloudant = Cloudant(appEnv.services['cloudantNoSQLDB'][0].credentials);
-        }
-        else{
         const appEnv = new Config().getAppEnv()
         this.cloudant = Cloudant(appEnv.services['cloudantNoSQLDB'][0].credentials);
-        }
         this.cloudant.db.create('news', (err) => {
             if (!err) {
                 console.log('created db');
