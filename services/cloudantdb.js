@@ -5,8 +5,13 @@ var mydb;
 
 class CloudantDB {
     constructor() {
+        if(process.env.NODE_ENV == 'production'){
+            this.cloudant = Cloudant(process.env.VCAP_SERVICES['cloudantNoSQLDB'][0].credentials);
+        }
+        else{
         const appEnv = new Config().getAppEnv()
         this.cloudant = Cloudant(appEnv.services['cloudantNoSQLDB'][0].credentials);
+        }
         this.cloudant.db.create('news', (err) => {
             if (!err) {
                 console.log('created db');
@@ -30,15 +35,6 @@ class CloudantDB {
         })
     }
 
-    checkDuplicates(news) {
-        const selector = { selector: { title: news.title } };
-        mydb.find(selector, (err, result) =>{
-            console.log(err);
-            console.log(result);
-            if(err) return false;
-            if(result) return false
-        })
-    }
 }
 
 module.exports = CloudantDB
